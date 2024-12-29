@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        'bordered': '0 0px 4px 4px rgba(0, 0, 0, 0.1)'
+      }
+    },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 };

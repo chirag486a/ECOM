@@ -11,13 +11,9 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
-    <style>
-      body {
-        font-family: "Roboto", sans-serif;
-      }
-    </style>
+    <style></style>
   </head>
-  <body class="">
+  <body class="bg-slate-50">
     <div class="flex flex-col items-center mx-auto">
       <!-- Heading -->
       <div>
@@ -30,7 +26,7 @@
             class="flex gap-0 transition duration-150 ease-in border-4 border-transparent rounded-lg group-focus-within:border-4 group-focus-within:border-slate-400"
           >
             <div
-              class="border border-r-0 rounded-md rounded-r-none cursor-pointer bg-slate-300"
+              class="border border-r-0 rounded-md rounded-r-none bg-slate-300"
             >
               <select
                 name="category"
@@ -47,63 +43,233 @@
               type="search"
               name="query"
               id="searchInputEl"
-              placeholder="Search 🔍"
+              placeholder="Search"
               class="flex-1 block h-10 px-4 text-base transition-all duration-150 border border-l-0 border-r-0 rounded-md rounded-l-none rounded-r-none outline-none peer focus:border-transparent focus:text-sm"
             />
-            <button class="min-h-full px-2 text-base rounded-r-md bg-slate-300 ">Go</button>
+            <button class="min-h-full px-2 text-base rounded-r-md bg-slate-300">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M9.539 15.23q-2.398 0-4.065-1.666Q3.808 11.899 3.808 9.5t1.666-4.065T9.539 3.77t4.064 1.666T15.269 9.5q0 1.042-.369 2.017t-.97 1.668l5.909 5.907q.14.14.15.345q.009.203-.15.363q-.16.16-.354.16t-.354-.16l-5.908-5.908q-.75.639-1.725.989t-1.96.35m0-1q1.99 0 3.361-1.37q1.37-1.37 1.37-3.361T12.9 6.14T9.54 4.77q-1.991 0-3.361 1.37T4.808 9.5t1.37 3.36t3.36 1.37"
+                />
+              </svg>
+            </button>
           </div>
         </form>
       </div>
       <!-- PRODUCT LISTS -->
       <div class="w-8/12 mt-6 mb-32">
         <div class="flex flex-row flex-wrap gap-12">
-          <button>
+          <div
+            class="flex flex-col gap-4 transition-all duration-300 bg-white rounded-sm min-w-52 max-w-52 hover:shadow-bordered group"
+            id="cardContainer"
+          >
             <div
-              class="flex flex-col gap-4 p-6 shadow-2xl max-w-56 bg-slate-100 rounded-xl group hover:cursor-pointer"
+              class="w-full overflow-hidden transition-all duration-150 rounded-sm aspect-square"
             >
-              <div
-                class="relative w-full overflow-hidden transition-all duration-150 rounded-lg aspect-square group-hover:brightness-75"
-              >
+              <button class="w-full h-full">
+                <div
+                  class="flex items-center justify-center w-full h-full bg-slate-200"
+                >
+                  <span>&nbsp;</span>
+                </div>
                 <img
-                  src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
-                  alt="Product Thumbnail"
-                  class="transition-all duration-150 scale-150 aspect-square bg-slate-300 group-hover:scale-100"
+                  src=""
+                  alt="Fix yor internet"
+                  class="hidden text-center transition-all duration-150 aspect-square bg-slate-300"
                 />
+              </button>
+            </div>
+            <div class="flex flex-col gap-1 px-2 pb-4">
+              <div class="">
+                <div class="w-[50%] bg-slate-200">&nbsp;</div>
               </div>
-              <div class="flex flex-col gap-4">
-                <div class="flex items-baseline lg:gap-8 lg:px-1">
+              <div class="hidden">
+                <div class="flex items-baseline lg:gap-8">
                   <span
-                    class="text-base font-bold transition-all duration-150 text-slate-700 hover:opacity-75"
+                    class="text-base text-red-700 transition-all duration-150"
                     >$200 /-</span
                   >
-                  <!-- <span class="text-xs font-light opacity-75">At 50% off</span> -->
                   <span class="text-base font-normal line-through opacity-60"
                     >$400</span
                   >
                 </div>
-                <div class="w-full">
-                  <span
-                    class="inline-block max-w-full overflow-hidden text-base text-left text-slate-800 text-wrap"
-                    >Samsung S24 Ultra Hello world</span
-                  >
+              </div>
+              <div class="max-w-full">
+                <button class="w-full max-w-full overflow-hidden">
+                  <div class="w-full h-12">
+                    <div class="w-full bg-slate-200">&nbsp;</div>
+                  </div>
+                  <div class="hidden h-12">
+                    <span
+                      class="max-w-full overflow-hidden text-sm text-left text-ellipsis whitespace-nowrap text-slate-800 text-wrap line-clamp-2"
+                      >Super duper fair & Lovely</span
+                    >
+                  </div>
+                </button>
+              </div>
+              <div>
+                <div class="w-[50%] h-full text-sm rounded-sm bg-slate-200">
+                  &nbsp;
                 </div>
-                <div class="flex items-baseline gap-2 text-xs">
-                  <span class="opacity-75 text-slate-800">4.6</span>
-                  <span class="flex items-end text-sm">
-                    <span class="hover:brightness-75">⭐</span>
-                    <span class="hover:brightness-75">⭐</span>
-                    <span class="hover:brightness-75">⭐</span>
-                    <span class="hover:brightness-75">⭐</span>
-                    <span class="hover:brightness-75">⭐</span>
-                  </span>
-                  <span class="ml-4 opacity-75 text-slate-800">(4)</span>
+                <div class="hidden">
+                  <div class="flex items-center gap-2 text-xs cursor-default">
+                    <span class="opacity-75 text-slate-800">3.5</span>
+                    <div class="relative flex h-full text-sm text-gray-300">
+                      <div
+                        class="absolute inset-0 w-[70%] overflow-hidden text-yellow-500"
+                      >
+                        <div class="flex w-fit">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 fill-yellow-500"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                            />
+                          </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 fill-yellow-500"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                            />
+                          </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 fill-yellow-500"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                            />
+                          </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 fill-yellow-500"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                            />
+                          </svg>
+                          <svg
+                            class="h-4 fill-yellow-500"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="flex w-fit">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 fill-transparent"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                          />
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 fill-transparent"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                          />
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 fill-transparent"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                          />
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 fill-transparent"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                          />
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 fill-transparent"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <span class="ml-4 opacity-75 text-slate-800">(4)</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </button>
+          </div>
         </div>
       </div>
     </div>
     <script src="./script.js" type="module"></script>
   </body>
 </html>
+>
