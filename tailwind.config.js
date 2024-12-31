@@ -1,12 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: ["./src/**/*.{html,js}", "./*.html"],
   theme: {
     extend: {
       boxShadow: {
-        'bordered': '0 0px 4px 4px rgba(0, 0, 0, 0.1)'
-      }
+        bordered: "0 0px 4px 4px rgba(0, 0, 0, 0.1)",
+      },
     },
   },
-  plugins: [require('@tailwindcss/line-clamp')],
+  plugins: [require("@tailwindcss/line-clamp")],
 };
