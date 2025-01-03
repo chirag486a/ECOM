@@ -347,7 +347,7 @@ searchForm.addEventListener("submit", async (e) => {
     );
   } else {
     res = await fetch(
-      `https://dummyjson.com/products/category/${categorySearchEl.value}?skip=24&limit=12`
+      `https://dummyjson.com/products/category/${categorySearchEl.value}`
     );
   }
 
@@ -377,7 +377,6 @@ searchForm.addEventListener("submit", async (e) => {
   } else {
     noOfBox = data.products.length;
   }
-  console.log(data);
 
   // Create template
   // Insert Template to html
@@ -418,28 +417,35 @@ searchForm.addEventListener("submit", async (e) => {
   if (noOfTabs <= 5) {
     for (let i = 1; i < noOfTabs; i++) {
       const tabNumEl = parser.parseFromString(tabNumHtml, "text/html");
-      tabNumEl.textContent = i;
+      tabNumEl.firstChild.textContent = i;
       if (i === 1) {
-        tabNumEl.dataset.active = true;
+        tabNumEl.querySelector("button").dataset.active = true;
       }
-      tabNumEl.dataset.tabNo = i;
+      tabNumEl.querySelector("button").dataset.tabNo = i;
       tabNumContainerEl.querySelector("ul").appendChild(tabNumEl);
     }
   }
   // more than 5 tab
   if (noOfTabs >= 5) {
-    for (let i = 1; i < 5; i++) {
-      const tabNumEl = parser.parseFromString(tabNumHtml, "text/html").querySelector('li');
-      tabNumEl.textContent = i;
+    for (let i = 1; i <= 5; i++) {
+      const tabNumEl = parser
+        .parseFromString(tabNumHtml, "text/html")
+        .querySelector("li");
+      tabNumEl.querySelector("button").textContent = i;
+      tabNumEl.querySelector("button").dataset.tabNo = i;
+
       if (i === 1) {
-        tabNumEl.dataset.active = true;
+        tabNumEl.querySelector("button").dataset.active = true;
       }
-      if (noOfTabs === 4) {
-        tabNumEl.dataset.tabNo = "...";
+
+      if (i === 4) {
+        console.log(i);
+        tabNumEl.querySelector("button").dataset.tabNo = "";
+        tabNumEl.querySelector("button").textContent = "...";
       }
-      if (noOfTabs === 5) {
-        tabNumEl.textContent = noOfTabs;
-        tabNumEl.dataset.tabNo = noOfTabs;
+      if (i === 5) {
+        tabNumEl.querySelector("button").textContent = noOfTabs;
+        tabNumEl.querySelector("button").dataset.tabNo = noOfTabs;
       }
       tabNumContainerEl.querySelector("ul").appendChild(tabNumEl);
     }
@@ -448,13 +454,13 @@ searchForm.addEventListener("submit", async (e) => {
   const tabMenuContainerEl = parser
     .parseFromString(tabMenuContainerHtml, "text/html")
     .querySelector("div");
-    console.log(btnPreviousEl);
+  console.log(btnPreviousEl);
 
   tabMenuContainerEl.appendChild(btnPreviousEl);
   tabMenuContainerEl.appendChild(tabNumContainerEl);
   tabMenuContainerEl.appendChild(btnNextEl);
 
-  const tabMenuEl = document.querySelector(".tab-menu-container");
+  const tabMenuEl = document.querySelector(".page-tab-container");
   tabMenuEl.appendChild(tabMenuContainerEl);
 
   searchInputEl.value = "";
@@ -599,4 +605,84 @@ cardContainer.addEventListener("click", async (e) => {
   productDescriptionContainer.appendChild(productDescriptionModel);
 
   document.addEventListener("click", exitModelClick);
+});
+
+const pageTabContainer = document.querySelector(".page-tab-container");
+
+pageTabContainer.addEventListener("click", (e) => {
+  if (!(e.target.closest("li") || e.target.closest("button"))) return;
+  const elClicked = e.target;
+  if (elClicked.closest("button")) {
+    const activeTabNo = Number(
+      document.querySelector('[data-active="true"]').textContent
+    );
+    if (elClicked.textContent === "Next") {
+      const startIndex = 12 * activeTabNo;
+      const endIndex = 12 * (activeTabNo + 1);
+
+      // If all
+      if (categorySearchEl.value === "all") {
+        if (data.total < startIndex) {
+          return;
+        }
+        fetch(
+          `https://dummyjson.com/products/search?q=${searchInputEl.value}&select=title,price,discountPercentage,rating,thumbnail,reviews&skip=${startIndex}&limit=${endIndex}`
+        )
+          .then((res) => {
+            if (!res.ok) {
+              const err = document.createElement("div");
+              err.textContent = `💥 Something Went wrong`;
+              cardContainer.appendChild(err);
+              return -1;
+            }
+            return res.json();
+          })
+          .then((data) => {
+            // If nothing found
+            if (data.total === 0) {
+              const notFoundEl = document.createElement("div");
+              notFoundEl.textContent = ` 💥 Not Found `;
+              cardContainer.appendChild(notFoundEl);
+              return -1;
+            }
+            // Define no of box to show in ui
+            let noOfBox = 0;
+            if (data.products.length >= 12) {
+              noOfBox = 12;
+            } else {
+              noOfBox = data.products.length;
+            }
+
+            // Create template
+            // Insert Template to html
+            // Insert Data to template
+
+            removeAllChild();
+            for (let i = 0; i < noOfBox; i++) {
+              productTemplateInserter(
+                productTemplateCreator(data.products[i].id)
+              );
+              productTemplateDataInserter(data.products[i]);
+            }
+            // use varaible instead of html element
+            // document.querySelector()
+            console.log(document.querySelector(`[data-tab-no=${activeTabNo + 1}]`));
+
+          });
+      }
+      // If category
+
+      // Start = 12 * (current_tab)
+      // End = 12 * (current_tab++)
+      // current_tab = 4
+      // start = 48
+      // end = 60
+    }
+    if (elClicked.textContent === "Previous") {
+    }
+  }
+  if (e.target.closest("li")) {
+  }
+  // console.log(e.target);
+  // console.log(data);
 });
