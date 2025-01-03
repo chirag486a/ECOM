@@ -1,3 +1,24 @@
+const btnNextPreviousHtml = `
+<button class="w-2/12 p-4 underline rounded-lg rounded-l-none"> </button>
+`;
+const tabMenuContainerHtml = `
+<div class="flex items-center justify-center w-full">
+</div>
+`;
+
+const tabNumHtml = `
+<li>
+<button class="box-content w-12 h-12 border rounded-lg" data-active="true" data-tab-no=""></button>
+</li>
+`;
+
+const tabNumContainerHtml = `
+<div class="flex items-center justify-center w-full">
+  <ul class="flex gap-1">
+  </ul>
+</div>
+`;
+
 const productElString = `
 <div class="flex flex-col gap-4 transition-all duration-300 bg-white rounded-sm min-w-52 max-w-52 hover:shadow-bordered group cardBox">
   <div class="w-full overflow-hidden transition-all duration-150 rounded-sm aspect-square">
@@ -69,22 +90,14 @@ const productElString = `
 const productDescriptionHtml = `
 <div class="absolute top-0 z-10 p-12 transition-all duration-500 -translate-x-1/2 bg-white border-4 left-1/2 w-fit h-fit border-slate-900 product-description-model">
   <div>
-    <h3 class="mb-4 text-2xl">Product Details</h3>
+    <h3 class="mb-8 text-2xl">Product Details</h3>
     <div class="mb-12">
       <div class="flex gap-8">
         <div class="flex flex-col gap-2">
-          <div class="bg-black min-w-80 aspect-square product-image-container relative">
-            <img src="" alt="" class="text-center transition-all duration-150 aspect-square product-image blur-sm object-cover">
-            <p class="absolute inset-0 flex items-center justify-center text-sm opacity-50 image-load-error">Fix your internet</p>
+          <div class="bg-black min-w-80 max-w-80 aspect-square product-image-container relative">
+            <img src="" alt="" class="text-center transition-all duration-150 aspect-square product-image object-cover">
           </div>
-          <div class="h-24  flex gap-2 w-72 small-image-container overflow-scroll">
-            <div class="h-16 aspect-square bg-black"></div>
-            <div class="h-16 aspect-square bg-black"></div>
-            <div class="h-16 aspect-square bg-black"></div>
-            <div class="h-16 aspect-square bg-black"></div>
-            <div class="h-16 aspect-square bg-black"></div>
-            <div class="h-16 aspect-square bg-black"></div>
-            <div class="h-16 aspect-square bg-black"></div>
+          <div class="h-24  flex gap-2 w-72 small-image-container overflow-x-auto">
           </div>
         </div>
         <div class="flex flex-col gap-4 pr-8 w-96">
@@ -320,6 +333,8 @@ const removeAllChild = function () {
   }
 };
 
+let data;
+
 searchForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   removeAllChild();
@@ -343,7 +358,7 @@ searchForm.addEventListener("submit", async (e) => {
     return -1;
   }
 
-  const data = await res.json();
+  data = await res.json();
 
   // If nothing found
   if (data.total === 0) {
@@ -372,6 +387,76 @@ searchForm.addEventListener("submit", async (e) => {
     productTemplateInserter(productTemplateCreator(data.products[i].id));
     productTemplateDataInserter(data.products[i]);
   }
+
+  // TAB FEATURE
+  const totalData = data.total;
+  const noOfTabs = data.total / 12 < 1 ? 0 : Math.floor(data.total / 12);
+  console.log(totalData, noOfTabs);
+
+  // Previous
+  // Tabs
+  // one tab
+  // 5 tab
+  let btnPreviousEl;
+  let btnNextEl;
+  let tabNumContainerEl;
+
+  btnPreviousEl = parser
+    .parseFromString(btnNextPreviousHtml, "text/html")
+    .querySelector("button");
+  btnNextEl = parser
+    .parseFromString(btnNextPreviousHtml, "text/html")
+    .querySelector("button");
+  tabNumContainerEl = parser
+    .parseFromString(tabNumContainerHtml, "text/html")
+    .querySelector("div");
+
+  if (noOfTabs > 1) {
+    btnNextEl.textContent = "Next";
+  }
+
+  if (noOfTabs <= 5) {
+    for (let i = 1; i < noOfTabs; i++) {
+      const tabNumEl = parser.parseFromString(tabNumHtml, "text/html");
+      tabNumEl.textContent = i;
+      if (i === 1) {
+        tabNumEl.dataset.active = true;
+      }
+      tabNumEl.dataset.tabNo = i;
+      tabNumContainerEl.querySelector("ul").appendChild(tabNumEl);
+    }
+  }
+  // more than 5 tab
+  if (noOfTabs >= 5) {
+    for (let i = 1; i < 5; i++) {
+      const tabNumEl = parser.parseFromString(tabNumHtml, "text/html").querySelector('li');
+      tabNumEl.textContent = i;
+      if (i === 1) {
+        tabNumEl.dataset.active = true;
+      }
+      if (noOfTabs === 4) {
+        tabNumEl.dataset.tabNo = "...";
+      }
+      if (noOfTabs === 5) {
+        tabNumEl.textContent = noOfTabs;
+        tabNumEl.dataset.tabNo = noOfTabs;
+      }
+      tabNumContainerEl.querySelector("ul").appendChild(tabNumEl);
+    }
+  }
+  // Next
+  const tabMenuContainerEl = parser
+    .parseFromString(tabMenuContainerHtml, "text/html")
+    .querySelector("div");
+    console.log(btnPreviousEl);
+
+  tabMenuContainerEl.appendChild(btnPreviousEl);
+  tabMenuContainerEl.appendChild(tabNumContainerEl);
+  tabMenuContainerEl.appendChild(btnNextEl);
+
+  const tabMenuEl = document.querySelector(".tab-menu-container");
+  tabMenuEl.appendChild(tabMenuContainerEl);
+
   searchInputEl.value = "";
 });
 
@@ -402,6 +487,7 @@ cardContainer.addEventListener("click", async (e) => {
   const productPriceBeforeDiscount = productDescriptionModel.querySelector(
     ".product-price-before-discount"
   );
+
   const productDiscount =
     productDescriptionModel.querySelector(".product-discount");
   const productPriceAfterDiscount = productDescriptionModel.querySelector(
@@ -421,11 +507,13 @@ cardContainer.addEventListener("click", async (e) => {
   const productDepth = productDescriptionModel.querySelector(".product-depth");
   const productWarrenty =
     productDescriptionModel.querySelector(".product-warrenty");
+  const productImg = productDescriptionModel.querySelector(
+    ".product-image-container img"
+  );
 
   const data = await fetch(`https://dummyjson.com/products/${id}`).then((res) =>
     res.json()
   );
-  console.log(data);
   productName.textContent = data.title;
   productReturnPolicy.textContent = data.returnPolicy;
   productPriceBeforeDiscount.textContent = data.price;
@@ -473,5 +561,42 @@ cardContainer.addEventListener("click", async (e) => {
     productReviewedTime.textContent = timeago.format(review.date);
     productReviews.appendChild(productReview);
   }
+
+  const productModelImg = `
+    <div class="h-16 aspect-square bg-black">
+      <img src="" alt="" class="text-center transition-all duration-150 aspect-square product-image object-cover">
+    </div>
+  `;
+
+  productImg.src = data.images[0];
+
+  for (const imgSrc of data.images) {
+    const productModelSmallImg = parser
+      .parseFromString(productModelImg, "text/html")
+      .querySelector("div");
+    productModelSmallImg.querySelector("img").src = imgSrc;
+    productModelSmallImg.style.cursor = "pointer";
+    productModelSmallImg.addEventListener("click", (e) => {
+      productImg.src = imgSrc;
+    });
+
+    productDescriptionModel
+      .querySelector(".small-image-container")
+      .appendChild(productModelSmallImg);
+  }
+
+  const exitModelClick = (e) => {
+    if (!e.target.closest(".product-description-model")) {
+      if (productDescriptionContainer.firstChild) {
+        productDescriptionContainer.removeChild(
+          productDescriptionContainer.firstChild
+        );
+      }
+      document.removeEventListener("click", exitModelClick);
+      return;
+    }
+  };
   productDescriptionContainer.appendChild(productDescriptionModel);
+
+  document.addEventListener("click", exitModelClick);
 });
