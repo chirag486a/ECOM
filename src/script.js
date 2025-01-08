@@ -1,3 +1,7 @@
+import productElString from "./htmljs/Product.js";
+import productDescriptionHtml from "./htmljs/ProductDescription.js";
+import productReviewHtml from "./htmljs/ProductReviewHtml.js";
+
 const btnNextPreviousHtml = `
 <button class="w-2/12 p-4 underline rounded-lg rounded-l-none"> </button>
 `;
@@ -19,200 +23,6 @@ const tabNumContainerHtml = `
 </div>
 `;
 
-const productElString = `
-<div class="flex flex-col gap-4 transition-all duration-300 bg-white rounded-sm min-w-52 max-w-52 hover:shadow-bordered group cardBox">
-  <div class="w-full overflow-hidden transition-all duration-150 rounded-sm aspect-square">
-    <button class="relative w-full h-full ">
-      <img src="" alt="" class="text-center transition-all duration-150 aspect-square product-image blur-sm object-cover">
-      <p class="absolute inset-0 flex items-center justify-center text-sm opacity-50 image-load-error">Fix your internet</p>
-    </button>
-  </div>
-  <div class="flex flex-col gap-1 px-2 pb-4 blur-sm product-overview-details transition-all duration-150">
-    <div class="flex items-baseline lg:gap-8">
-      <span class="text-base text-red-700 transition-all duration-150 product-price-after-discount">$200 /-</span>
-      <span class="text-base font-normal line-through opacity-60 product-price-before-discount">$400</span>
-    </div>
-    <div class="max-w-full">
-      <button class="w-full max-w-full overflow-hidden">
-        <div class="h-12">
-          <span class="max-w-full overflow-hidden text-sm text-left text-ellipsis whitespace-nowrap text-slate-800 text-wrap line-clamp-2 product-name">Super duper fair & Lovely</span>
-        </div>
-      </button>
-    </div>
-    <div class="ratings-container">
-      <div class="flex items-center gap-2 text-xs cursor-default">
-        <span class="opacity-75 text-slate-800 ratings-number">3.5</span>
-        <div class="relative flex h-full text-sm text-gray-300">
-          <div class="absolute inset-0 w-[70%] overflow-hidden text-yellow-500 ratings-star">
-            <div class="flex w-fit">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-yellow-500" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-yellow-500" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-yellow-500" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-yellow-500" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-              </svg>
-              <svg class="h-4 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-              </svg>
-            </div>
-          </div>
-          <div class="flex w-fit">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-transparent" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-transparent" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-transparent" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-transparent" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-transparent" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-            </svg>
-          </div>
-        </div>
-        <span class="ml-4 opacity-75 text-slate-800 ratings-quantity">(4)</span>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-const productDescriptionHtml = `
-<div class="absolute top-0 z-10 p-12 transition-all duration-500 -translate-x-1/2 bg-white border-4 left-1/2 w-fit h-fit border-slate-900 product-description-model">
-  <div>
-    <h3 class="mb-8 text-2xl">Product Details</h3>
-    <div class="mb-12">
-      <div class="flex gap-8">
-        <div class="flex flex-col gap-2">
-          <div class="bg-black min-w-80 max-w-80 aspect-square product-image-container relative">
-            <img src="" alt="" class="text-center transition-all duration-150 aspect-square product-image object-cover">
-          </div>
-          <div class="h-24  flex gap-2 w-72 small-image-container overflow-x-auto">
-          </div>
-        </div>
-        <div class="flex flex-col gap-4 pr-8 w-96">
-          <div>
-            <div class="text-2xl product-name">Essence Mascara Lash Princess</div>
-            <div class="text-sm opacity-75 product-return-policy">30 days return policy</div>
-          </div>
-          <div class="flex items-baseline gap-8">
-            <span class="text-4xl text-red-800 product-price-before-discount">$200</span>
-            <span class="font-bold product-discount">50% off</span>
-            <span class="text-4xl line-through opacity-60 product-price-after-discount">400</span>
-          </div>
-          <div class="text-lg product-stock-left">Only 5 left</div>
-          <div class="text-sm product-description">The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.</div>
-          <div class="flex items-end justify-end w-full h-full">
-            <button class="px-12 py-4 bg-red-900 rounded-md w-fit h-fit text-red-50">Add To Cart</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="flex gap-12 flex-col">
-      <div class="flex flex-col gap-6">
-        <h4 class="text-xl">Additional Information</h4>
-        <div class="flex flex-col gap-4 pl-12 text-sm">
-          <div class="flex gap-6">
-            <div>Brand</div>
-            <div class="product-brand">...</div>
-          </div>
-          <div class="flex gap-6">
-            <div>Tags</div>
-            <div class="product-tags">...</div>
-          </div>
-          <div class="flex gap-6">
-            <div>Dimension</div>
-            <div>
-              <span>width</span>
-              <span class="product-width">(20)</span>
-            </div>
-            <div>
-              <span>height</span>
-              <span class="product-height">(30)</span>
-            </div>
-            <div>
-              <span>depth</span>
-              <span class="product-depth">(82)</span>
-            </div>
-          </div>
-          <div class="flex gap-6">
-            <span>Warenty</span>
-            <div class="product-warrenty">...</div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h3 class="mb-6 text-2xl">Reviews</h3>
-        <div class="flex flex-col px-12 product-reviews">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-const productReviewHtml = `
-<div class="flex gap-2 [&:not(:last-child)]:border-b-2 w-1/2 [&:not(:first-child)]:pt-4 [&:not(:last-child)]:pb-4 product-review">
-  <div class="w-10 h-10 rounded-sm bg-slate-500"></div>
-  <div class="">
-    <div class="flex flex-col mb-2">
-      <span class="product-reviewer-name">Natalie Harris</span>
-      <span class="text-xs opacity-60 product-reviewed-time">1 Min ago</span>
-    </div>
-    <div class="mb-4">
-      <div class="relative flex h-full text-sm text-gray-300">
-        <div class="absolute inset-0 w-[70%] overflow-hidden text-yellow-500 ratings-star product-reviewed-star">
-          <div class="flex w-fit">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-yellow-500" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-yellow-500" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-yellow-500" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-yellow-500" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-            </svg>
-            <svg class="h-4 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-            </svg>
-          </div>
-        </div>
-        <div class="flex w-fit">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-transparent" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-transparent" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-transparent" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-transparent" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 fill-transparent" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-          </svg>
-        </div>
-      </div>
-    </div>
-    <div class="text-sm product-reviewed-comment">Excellent quality!</div>
-  </div>
-</div>
-`;
 
 const categorySearchEl = document.querySelector("#categorySearchEl");
 const productDescriptionContainer = document.querySelector(
@@ -335,6 +145,63 @@ const removeAllChild = function () {
 
 let data;
 
+(async function () {
+  removeAllChild();
+
+  let res;
+
+  if (categorySearchEl.value === "all") {
+    res = await fetch(
+      `https://dummyjson.com/products/search?q=${searchInputEl.value}&select=title,price,discountPercentage,rating,thumbnail,reviews`
+    );
+  } else {
+    res = await fetch(
+      `https://dummyjson.com/products/category/${categorySearchEl.value}`
+    );
+  }
+
+  if (!res.ok) {
+    const err = document.createElement("div");
+    err.textContent = `💥 Something Went wrong`;
+    cardContainer.appendChild(err);
+    return -1;
+  }
+
+  data = await res.json();
+
+  // If nothing found
+  if (data.total === 0) {
+    const notFoundEl = document.createElement("div");
+    notFoundEl.textContent = `
+    💥 Not Found
+    `;
+    cardContainer.appendChild(notFoundEl);
+    return -1;
+  }
+
+  data.products = data.products.filter((obj) => {
+    return obj.title.includes(searchInputEl.value);
+  });
+  data.total = data.products.length;
+
+  // Define no of box to show in ui
+  let noOfBox = 0;
+  if (data.products.length >= 12) {
+    noOfBox = 12;
+  } else {
+    noOfBox = data.products.length;
+  }
+
+  // Create template
+  // Insert Template to html
+  // Insert Data to template
+
+  for (let i = 0; i < noOfBox; i++) {
+    productTemplateInserter(productTemplateCreator(data.products[i].id));
+    productTemplateDataInserter(data.products[i]);
+  }
+})();
+
 searchForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   removeAllChild();
@@ -370,9 +237,16 @@ searchForm.addEventListener("submit", async (e) => {
     return -1;
   }
 
+  data.products = data.products.filter((obj) => {
+    return obj.title.includes(searchInputEl.value);
+  });
+  if (data.total <= 12) {
+    data.total = data.products.length;
+  }
+
   // Define no of box to show in ui
   let noOfBox = 0;
-  if (data.products.length >= 12) {
+  if (data.total >= 12) {
     noOfBox = 12;
   } else {
     noOfBox = data.products.length;
@@ -388,80 +262,27 @@ searchForm.addEventListener("submit", async (e) => {
   }
 
   // TAB FEATURE
-  const totalData = data.total;
-  const noOfTabs = data.total / 12 < 1 ? 0 : Math.floor(data.total / 12);
-  console.log(totalData, noOfTabs);
-
-  // Previous
-  // Tabs
-  // one tab
-  // 5 tab
   let btnPreviousEl;
   let btnNextEl;
-  let tabNumContainerEl;
 
   btnPreviousEl = parser
     .parseFromString(btnNextPreviousHtml, "text/html")
     .querySelector("button");
+
   btnNextEl = parser
     .parseFromString(btnNextPreviousHtml, "text/html")
     .querySelector("button");
-  tabNumContainerEl = parser
-    .parseFromString(tabNumContainerHtml, "text/html")
-    .querySelector("div");
 
-  if (noOfTabs > 1) {
-    btnNextEl.textContent = "Next";
-  }
-
-  if (noOfTabs <= 5) {
-    for (let i = 1; i < noOfTabs; i++) {
-      const tabNumEl = parser.parseFromString(tabNumHtml, "text/html");
-      tabNumEl.firstChild.textContent = i;
-      if (i === 1) {
-        tabNumEl.querySelector("button").dataset.active = true;
-      }
-      tabNumEl.querySelector("button").dataset.tabNo = i;
-      tabNumContainerEl.querySelector("ul").appendChild(tabNumEl);
-    }
-  }
-  // more than 5 tab
-  if (noOfTabs >= 5) {
-    for (let i = 1; i <= 5; i++) {
-      const tabNumEl = parser
-        .parseFromString(tabNumHtml, "text/html")
-        .querySelector("li");
-      tabNumEl.querySelector("button").textContent = i;
-      tabNumEl.querySelector("button").dataset.tabNo = i;
-
-      if (i === 1) {
-        tabNumEl.querySelector("button").dataset.active = true;
-      }
-
-      if (i === 4) {
-        console.log(i);
-        tabNumEl.querySelector("button").dataset.tabNo = "";
-        tabNumEl.querySelector("button").textContent = "...";
-      }
-      if (i === 5) {
-        tabNumEl.querySelector("button").textContent = noOfTabs;
-        tabNumEl.querySelector("button").dataset.tabNo = noOfTabs;
-      }
-      tabNumContainerEl.querySelector("ul").appendChild(tabNumEl);
-    }
-  }
   // Next
-  const tabMenuContainerEl = parser
+  const pageTabEl = parser
     .parseFromString(tabMenuContainerHtml, "text/html")
     .querySelector("div");
-  console.log(btnPreviousEl);
 
-  tabMenuContainerEl.appendChild(btnPreviousEl);
-  tabMenuContainerEl.appendChild(tabNumContainerEl);
-  tabMenuContainerEl.appendChild(btnNextEl);
+  pageTabEl.appendChild(btnPreviousEl);
+  pageTabEl.appendChild(btnNextEl);
 
-  const tabMenuEl = document.querySelector(".page-tab-container");
-  tabMenuEl.appendChild(tabMenuContainerEl);
+  const pageTabContainer = document.querySelector(".page-tab-container");
+  pageTabContainer.appendChild(pageTabEl);
 
   searchInputEl.value = "";
 });
@@ -613,76 +434,5 @@ pageTabContainer.addEventListener("click", (e) => {
   if (!(e.target.closest("li") || e.target.closest("button"))) return;
   const elClicked = e.target;
   if (elClicked.closest("button")) {
-    const activeTabNo = Number(
-      document.querySelector('[data-active="true"]').textContent
-    );
-    if (elClicked.textContent === "Next") {
-      const startIndex = 12 * activeTabNo;
-      const endIndex = 12 * (activeTabNo + 1);
-
-      // If all
-      if (categorySearchEl.value === "all") {
-        if (data.total < startIndex) {
-          return;
-        }
-        fetch(
-          `https://dummyjson.com/products/search?q=${searchInputEl.value}&select=title,price,discountPercentage,rating,thumbnail,reviews&skip=${startIndex}&limit=${endIndex}`
-        )
-          .then((res) => {
-            if (!res.ok) {
-              const err = document.createElement("div");
-              err.textContent = `💥 Something Went wrong`;
-              cardContainer.appendChild(err);
-              return -1;
-            }
-            return res.json();
-          })
-          .then((data) => {
-            // If nothing found
-            if (data.total === 0) {
-              const notFoundEl = document.createElement("div");
-              notFoundEl.textContent = ` 💥 Not Found `;
-              cardContainer.appendChild(notFoundEl);
-              return -1;
-            }
-            // Define no of box to show in ui
-            let noOfBox = 0;
-            if (data.products.length >= 12) {
-              noOfBox = 12;
-            } else {
-              noOfBox = data.products.length;
-            }
-
-            // Create template
-            // Insert Template to html
-            // Insert Data to template
-
-            removeAllChild();
-            for (let i = 0; i < noOfBox; i++) {
-              productTemplateInserter(
-                productTemplateCreator(data.products[i].id)
-              );
-              productTemplateDataInserter(data.products[i]);
-            }
-            // use varaible instead of html element
-            // document.querySelector()
-            console.log(document.querySelector(`[data-tab-no=${activeTabNo + 1}]`));
-
-          });
-      }
-      // If category
-
-      // Start = 12 * (current_tab)
-      // End = 12 * (current_tab++)
-      // current_tab = 4
-      // start = 48
-      // end = 60
-    }
-    if (elClicked.textContent === "Previous") {
-    }
   }
-  if (e.target.closest("li")) {
-  }
-  // console.log(e.target);
-  // console.log(data);
 });
