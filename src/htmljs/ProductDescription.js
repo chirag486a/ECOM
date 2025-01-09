@@ -5,7 +5,7 @@ export default `
     <div class="mb-12">
       <div class="flex gap-8">
         <div class="flex flex-col gap-2">
-          <div class="bg-black min-w-80 max-w-80 aspect-square product-image-container relative">
+          <div class="border-2 border-slate-400 min-w-80 max-w-80 aspect-square product-image-container relative">
             <img src="" alt="" class="text-center transition-all duration-150 aspect-square product-image object-cover">
           </div>
           <div class="h-24  flex gap-2 w-72 small-image-container overflow-x-auto">
@@ -17,9 +17,9 @@ export default `
             <div class="text-sm opacity-75 product-return-policy">30 days return policy</div>
           </div>
           <div class="flex items-baseline gap-8">
-            <span class="text-4xl text-red-800 product-price-before-discount">$200</span>
+            <span class="text-4xl text-red-800 product-price-after-discount">$200</span>
             <span class="font-bold product-discount">50% off</span>
-            <span class="text-4xl line-through opacity-60 product-price-after-discount">400</span>
+            <span class="text-4xl line-through opacity-60 product-price-before-discount">400</span>
           </div>
           <div class="text-lg product-stock-left">Only 5 left</div>
           <div class="text-sm product-description">The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.</div>

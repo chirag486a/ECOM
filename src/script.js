@@ -2,27 +2,23 @@ import productElString from "./htmljs/Product.js";
 import productDescriptionHtml from "./htmljs/ProductDescription.js";
 import productReviewHtml from "./htmljs/ProductReviewHtml.js";
 
+let total = 0;
+let limit = 12;
+let skip = 0;
+let query = "";
+let category = "all";
+
 const btnNextPreviousHtml = `
 <button class="w-2/12 p-4 underline rounded-lg rounded-l-none"> </button>
 `;
 const tabMenuContainerHtml = `
-<div class="flex items-center justify-center w-full">
+<div class="flex items-center justify-between w-full">
 </div>
 `;
 
-const tabNumHtml = `
-<li>
-<button class="box-content w-12 h-12 border rounded-lg" data-active="true" data-tab-no=""></button>
-</li>
-`;
-
-const tabNumContainerHtml = `
-<div class="flex items-center justify-center w-full">
-  <ul class="flex gap-1">
-  </ul>
-</div>
-`;
-
+const btnNextEl = document.querySelector("#btn-next-page");
+const btnPreviousEl = document.querySelector("#btn-previous-page");
+const pageNumber = document.querySelector("#page-number");
 
 const categorySearchEl = document.querySelector("#categorySearchEl");
 const productDescriptionContainer = document.querySelector(
@@ -152,11 +148,11 @@ let data;
 
   if (categorySearchEl.value === "all") {
     res = await fetch(
-      `https://dummyjson.com/products/search?q=${searchInputEl.value}&select=title,price,discountPercentage,rating,thumbnail,reviews`
+      `https://dummyjson.com/products/search?limit=${limit}&q=${query}&select=title,price,discountPercentage,rating,thumbnail,reviews`
     );
   } else {
     res = await fetch(
-      `https://dummyjson.com/products/category/${categorySearchEl.value}`
+      `https://dummyjson.com/products/category/${categorySearchEl.value}?limit=${limit}`
     );
   }
 
@@ -168,6 +164,7 @@ let data;
   }
 
   data = await res.json();
+  console.log(data);
 
   // If nothing found
   if (data.total === 0) {
@@ -182,39 +179,41 @@ let data;
   data.products = data.products.filter((obj) => {
     return obj.title.includes(searchInputEl.value);
   });
-  data.total = data.products.length;
 
-  // Define no of box to show in ui
-  let noOfBox = 0;
-  if (data.products.length >= 12) {
-    noOfBox = 12;
-  } else {
-    noOfBox = data.products.length;
-  }
-
-  // Create template
-  // Insert Template to html
-  // Insert Data to template
-
-  for (let i = 0; i < noOfBox; i++) {
+  for (let i = 0; i < data.products.length; i++) {
     productTemplateInserter(productTemplateCreator(data.products[i].id));
     productTemplateDataInserter(data.products[i]);
+  }
+
+  total = data.total;
+  skip = 0;
+  pageNumber.textContent = (skip + limit) / limit;
+  pageNumber.classList.remove("hidden");
+
+  if (data.total > limit) {
+    btnNextEl.classList.remove("hidden");
   }
 })();
 
 searchForm.addEventListener("submit", async (e) => {
+  pageNumber.classList.add("hidden");
+  btnNextEl.classList.add("hidden");
+  btnPreviousEl.classList.add("hidden");
+
   e.preventDefault();
   removeAllChild();
+  query = searchInputEl.value;
+  category = categorySearchEl.value;
 
   let res;
 
-  if (categorySearchEl.value === "all") {
+  if (category === "all") {
     res = await fetch(
-      `https://dummyjson.com/products/search?q=${searchInputEl.value}&select=title,price,discountPercentage,rating,thumbnail,reviews`
+      `https://dummyjson.com/products/search?q=${searchInputEl.value}&select=title,price,discountPercentage,rating,thumbnail,reviews&limit=${limit}`
     );
   } else {
     res = await fetch(
-      `https://dummyjson.com/products/category/${categorySearchEl.value}`
+      `https://dummyjson.com/products/category/${category}?limit=${limit}`
     );
   }
 
@@ -240,49 +239,28 @@ searchForm.addEventListener("submit", async (e) => {
   data.products = data.products.filter((obj) => {
     return obj.title.includes(searchInputEl.value);
   });
-  if (data.total <= 12) {
-    data.total = data.products.length;
+
+  if (data.products.length === 0) {
+    const notFoundEl = document.createElement("div");
+    notFoundEl.textContent = `
+    💥 Not Found
+    `;
+    cardContainer.appendChild(notFoundEl);
+    return -1;
   }
 
-  // Define no of box to show in ui
-  let noOfBox = 0;
-  if (data.total >= 12) {
-    noOfBox = 12;
-  } else {
-    noOfBox = data.products.length;
-  }
-
-  // Create template
-  // Insert Template to html
-  // Insert Data to template
-
-  for (let i = 0; i < noOfBox; i++) {
+  for (let i = 0; i < data.products.length; i++) {
     productTemplateInserter(productTemplateCreator(data.products[i].id));
     productTemplateDataInserter(data.products[i]);
   }
+  pageNumber.classList.remove("hidden");
 
-  // TAB FEATURE
-  let btnPreviousEl;
-  let btnNextEl;
-
-  btnPreviousEl = parser
-    .parseFromString(btnNextPreviousHtml, "text/html")
-    .querySelector("button");
-
-  btnNextEl = parser
-    .parseFromString(btnNextPreviousHtml, "text/html")
-    .querySelector("button");
-
-  // Next
-  const pageTabEl = parser
-    .parseFromString(tabMenuContainerHtml, "text/html")
-    .querySelector("div");
-
-  pageTabEl.appendChild(btnPreviousEl);
-  pageTabEl.appendChild(btnNextEl);
-
-  const pageTabContainer = document.querySelector(".page-tab-container");
-  pageTabContainer.appendChild(pageTabEl);
+  total = data.total;
+  skip = 0;
+  if (data.total > limit) {
+    btnNextEl.classList.remove("hidden");
+  }
+  pageNumber.textContent = (skip + limit) / limit;
 
   searchInputEl.value = "";
 });
@@ -346,8 +324,8 @@ cardContainer.addEventListener("click", async (e) => {
   productPriceBeforeDiscount.textContent = data.price;
   productDiscount.textContent = `${data.discountPercentage}%`;
   productPriceAfterDiscount.textContent = (
-    (data.discountPercentage / 100) *
-    data.price
+    data.price -
+    (data.discountPercentage / 100) * data.price
   ).toFixed(2);
   productDescription.textContent = data.description;
   productStockLeft.textContent = `Only ${data.stock} available`;
@@ -390,9 +368,11 @@ cardContainer.addEventListener("click", async (e) => {
   }
 
   const productModelImg = `
-    <div class="h-16 aspect-square bg-black">
+  <button>
+    <div class="h-16 aspect-square border shadow-md">
       <img src="" alt="" class="text-center transition-all duration-150 aspect-square product-image object-cover">
     </div>
+  </button>
   `;
 
   productImg.src = data.images[0];
@@ -430,9 +410,112 @@ cardContainer.addEventListener("click", async (e) => {
 
 const pageTabContainer = document.querySelector(".page-tab-container");
 
-pageTabContainer.addEventListener("click", (e) => {
-  if (!(e.target.closest("li") || e.target.closest("button"))) return;
+pageTabContainer.addEventListener("click", async (e) => {
   const elClicked = e.target;
-  if (elClicked.closest("button")) {
+  // total, limit, skip
+  if (
+    !(
+      elClicked.closest("#btn-previous-page") ||
+      elClicked.closest("#btn-next-page")
+    )
+  ) {
+    return;
+  }
+  if (elClicked.closest("#btn-next-page")) {
+    if (total > skip) {
+      removeAllChild();
+      skip = skip + limit;
+      if (skip + limit > total) {
+        btnNextEl.classList.add("hidden");
+      }
+      pageNumber.textContent = (skip + limit) / limit;
+
+      let res;
+      if (category === "all") {
+        res = await fetch(
+          `https://dummyjson.com/products/search?limit=${limit}&q=${query}&select=title,price,discountPercentage,rating,thumbnail,reviews&skip=${skip}`
+        );
+      } else {
+        category = categorySearchEl.value;
+        res = await fetch(
+          `https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`
+        );
+      }
+      if (!res.ok) {
+        const err = document.createElement("div");
+        err.textContent = `💥 Something Went wrong`;
+        cardContainer.appendChild(err);
+        return -1;
+      }
+
+      data = await res.json();
+
+      // If nothing found
+      if (data.total === 0) {
+        const notFoundEl = document.createElement("div");
+        notFoundEl.textContent = ` 💥 Not Found `;
+        cardContainer.appendChild(notFoundEl);
+        return -1;
+      }
+      console.log(data);
+
+      data.products = data.products.filter((obj) => {
+        return obj.title.includes(searchInputEl.value);
+      });
+
+      for (let i = 0; i < data.products.length; i++) {
+        productTemplateInserter(productTemplateCreator(data.products[i].id));
+        productTemplateDataInserter(data.products[i]);
+      }
+      btnPreviousEl.classList.remove("hidden");
+    }
+  }
+  if (elClicked.closest("#btn-previous-page")) {
+    if (skip > 0) {
+      removeAllChild();
+      skip = skip - limit;
+      if (skip <= 0) {
+        btnPreviousEl.classList.add("hidden");
+      }
+      pageNumber.textContent = (skip + limit) / limit;
+
+      let res;
+      if (category === "all") {
+        res = await fetch(
+          `https://dummyjson.com/products/search?limit=${limit}&q=${query}&select=title,price,discountPercentage,rating,thumbnail,reviews&skip=${skip}`
+        );
+      } else {
+        category = categorySearchEl.value;
+        res = await fetch(
+          `https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`
+        );
+      }
+      if (!res.ok) {
+        const err = document.createElement("div");
+        err.textContent = `💥 Something Went wrong`;
+        cardContainer.appendChild(err);
+        return -1;
+      }
+
+      data = await res.json();
+
+      // If nothing found
+      if (data.total === 0) {
+        const notFoundEl = document.createElement("div");
+        notFoundEl.textContent = ` 💥 Not Found `;
+        cardContainer.appendChild(notFoundEl);
+        return -1;
+      }
+
+      data.products = data.products.filter((obj) => {
+        return obj.title.includes(searchInputEl.value);
+      });
+
+      for (let i = 0; i < data.products.length; i++) {
+        productTemplateInserter(productTemplateCreator(data.products[i].id));
+        productTemplateDataInserter(data.products[i]);
+      }
+      btnNextEl.classList.remove("hidden");
+    }
   }
 });

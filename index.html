@@ -15,49 +15,53 @@
   </head>
   <body class="relative bg-slate-50">
     <div class="flex flex-col items-center mx-auto">
-      <!-- Heading -->
-      <!-- <div>
-        <h1 class="w-full mt-3 text-xl text-center">Search Our Products</h1>
-      </div> -->
-      <!-- Search Form -->
-      <div class="flex-1 w-full max-w-2xl mt-3">
-        <form class="w-full mx-auto group" id="search-form">
-          <div
-            class="flex gap-0 transition duration-150 ease-in border-4 border-transparent rounded-lg group-focus-within:border-4 group-focus-within:border-slate-400"
-          >
+      <div
+        class="relative flex items-center justify-center flex-1 w-full px-4 py-4 bg-red-400"
+      >
+        <div class="absolute top-4 left-4">
+          <span class="text-3xl font-extrabold text-red-950">ECOM</span>
+        </div>
+        <div class="w-full max-w-2xl">
+          <form class="w-full mx-auto group" id="search-form">
             <div
-              class="overflow-hidden border border-r-0 rounded-md rounded-r-none bg-slate-300"
+              class="flex gap-0 transition duration-150 ease-in border-4 border-transparent rounded-lg group-focus-within:border-red-700 border-spacing-12"
             >
-              <select
-                name="category"
-                id="categorySearchEl"
-                class="h-full p-2 text-sm bg-transparent outline-none cursor-pointer peer-focus:border-transparent"
+              <div
+                class="overflow-hidden bg-red-300 border-0 rounded-[4px] rounded-r-none"
               >
-                <option value="all" selected>All Category</option>
-              </select>
+                <select
+                  name="category"
+                  id="categorySearchEl"
+                  class="h-full p-2 text-sm bg-transparent outline-none cursor-pointer peer-focus:border-transparent"
+                >
+                  <option value="all" selected>All Category</option>
+                </select>
+              </div>
+              <input
+                type="search"
+                name="query"
+                id="searchInputEl"
+                placeholder="Search"
+                class="flex-1 block h-10 px-4 text-base transition-all duration-150 border-0 rounded-md rounded-l-none rounded-r-none outline-none peer focus:border-transparent focus:text-sm"
+              />
+              <button
+                class="min-h-full px-2 text-base border-0 rounded-r-[4px] bg-slate-300"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M9.539 15.23q-2.398 0-4.065-1.666Q3.808 11.899 3.808 9.5t1.666-4.065T9.539 3.77t4.064 1.666T15.269 9.5q0 1.042-.369 2.017t-.97 1.668l5.909 5.907q.14.14.15.345q.009.203-.15.363q-.16.16-.354.16t-.354-.16l-5.908-5.908q-.75.639-1.725.989t-1.96.35m0-1q1.99 0 3.361-1.37q1.37-1.37 1.37-3.361T12.9 6.14T9.54 4.77q-1.991 0-3.361 1.37T4.808 9.5t1.37 3.36t3.36 1.37"
+                  />
+                </svg>
+              </button>
             </div>
-            <input
-              type="search"
-              name="query"
-              id="searchInputEl"
-              placeholder="Search"
-              class="flex-1 block h-10 px-4 text-base transition-all duration-150 border border-l-0 border-r-0 rounded-md rounded-l-none rounded-r-none outline-none peer focus:border-transparent focus:text-sm"
-            />
-            <button class="min-h-full px-2 text-base rounded-r-md bg-slate-300">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M9.539 15.23q-2.398 0-4.065-1.666Q3.808 11.899 3.808 9.5t1.666-4.065T9.539 3.77t4.064 1.666T15.269 9.5q0 1.042-.369 2.017t-.97 1.668l5.909 5.907q.14.14.15.345q.009.203-.15.363q-.16.16-.354.16t-.354-.16l-5.908-5.908q-.75.639-1.725.989t-1.96.35m0-1q1.99 0 3.361-1.37q1.37-1.37 1.37-3.361T12.9 6.14T9.54 4.77q-1.991 0-3.361 1.37T4.808 9.5t1.37 3.36t3.36 1.37"
-                />
-              </svg>
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
       <!-- PRODUCT LISTS -->
       <div class="relative w-8/12 mx-auto mt-6 mb-32">
@@ -65,7 +69,32 @@
         <div
           class="flex flex-row flex-wrap items-center justify-center gap-2 card-container"
         ></div>
-        <div class="mt-12 page-tab-container"></div>
+        <div class="mt-12 page-tab-container">
+          <div class="flex items-center justify-between w-full h-16 gap-2">
+            <div class="w-2/12 h-full">
+              <button
+                class="hidden w-full p-4 underline rounded-lg rounded-l-none"
+                id="btn-previous-page"
+              >
+                Previous
+              </button>
+            </div>
+            <div class="flex-1 h-full text-center" id="btn-previous-container">
+              <span
+                class="hidden p-6 text-2xl border-2 rounded-sm"
+                id="page-number"
+              ></span>
+            </div>
+            <div class="w-2/12 h-full">
+              <button
+                class="hidden w-full p-4 underline rounded-lg rounded-l-none"
+                id="btn-next-page"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/timeago.js@4.0.2/dist/timeago.min.js"></script>
