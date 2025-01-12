@@ -177,7 +177,7 @@ let data;
   }
 
   data.products = data.products.filter((obj) => {
-    return obj.title.includes(searchInputEl.value);
+    return obj.title.toLowerCase().includes(searchInputEl.value.toLowerCase());
   });
 
   for (let i = 0; i < data.products.length; i++) {
@@ -202,7 +202,7 @@ searchForm.addEventListener("submit", async (e) => {
 
   e.preventDefault();
   removeAllChild();
-  query = searchInputEl.value;
+  query = searchInputEl.value.toLowerCase();
   category = categorySearchEl.value;
 
   let res;
@@ -236,8 +236,9 @@ searchForm.addEventListener("submit", async (e) => {
     return -1;
   }
 
+  
   data.products = data.products.filter((obj) => {
-    return obj.title.includes(searchInputEl.value);
+    return obj.title.toLowerCase().includes(searchInputEl.value.toLowerCase());
   });
 
   if (data.products.length === 0) {
@@ -457,10 +458,9 @@ pageTabContainer.addEventListener("click", async (e) => {
         cardContainer.appendChild(notFoundEl);
         return -1;
       }
-      console.log(data);
 
       data.products = data.products.filter((obj) => {
-        return obj.title.includes(searchInputEl.value);
+        return obj.title.toLowerCase().includes(searchInputEl.value.toLowerCase());
       });
 
       for (let i = 0; i < data.products.length; i++) {
@@ -508,7 +508,7 @@ pageTabContainer.addEventListener("click", async (e) => {
       }
 
       data.products = data.products.filter((obj) => {
-        return obj.title.includes(searchInputEl.value);
+        return obj.title.toLowerCase().includes(searchInputEl.value.toLowerCase());
       });
 
       for (let i = 0; i < data.products.length; i++) {
